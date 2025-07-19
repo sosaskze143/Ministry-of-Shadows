@@ -2,373 +2,100 @@
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>بوابة وزارة الظلال</title>
+  <title>بوابة وزارة الظلال - نموذج مع زر عرض</title>
   <style>
-    body {
-      font-family: 'Arial', sans-serif;
-      background-color: #111;
-      color: #fff;
-      padding: 20px;
-      text-align: center;
-    }
-    h1 {
-      color: gold;
-    }
-    .buttons {
-      margin: 30px 0;
-    }
-    .buttons button {
-      margin: 10px;
-      padding: 10px 20px;
-      background-color: gold;
-      color: black;
-      font-weight: bold;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: 0.3s;
-    }
-    .buttons button:hover {
-      background-color: #ffc400;
-    }
     .form-container {
       display: none;
-      margin-top: 30px;
-      text-align: right;
-      background-color: #222;
+      margin-top: 20px;
+      background: #222;
       padding: 20px;
       border-radius: 10px;
-      width: 90%;
       max-width: 600px;
       margin-inline: auto;
-    }
-    .form-container input, .form-container select {
-      width: 100%;
-      padding: 10px;
-      margin-bottom: 15px;
-      border-radius: 5px;
-      border: none;
-    }
-    .form-container button {
-      background-color: #444;
-      color: gold;
-      border: 1px solid gold;
-      padding: 10px;
-      width: 100%;
-      font-weight: bold;
-      cursor: pointer;
-      border-radius: 5px;
-      transition: 0.3s;
-    }
-    .form-container button:hover {
-      background-color: gold;
-      color: black;
-    }
-    #cardDisplay, #dataDisplay {
-      margin-top: 20px;
-      background: #333;
-      padding: 15px;
-      border-radius: 10px;
-      text-align: right;
-      display: none;
-      white-space: pre-wrap;
       color: #fff;
+      text-align: right;
+    }
+    button {
+      margin: 5px;
+      padding: 10px 15px;
+      border-radius: 6px;
+      cursor: pointer;
+      background: gold;
+      color: black;
+      border: none;
+      font-weight: bold;
+    }
+    button:hover {
+      background: #ffc400;
     }
   </style>
 </head>
 <body>
 
-  <h1>بوابة وزارة الظلال</h1>
-  <div class="buttons">
-    <button onclick="showForm('form1')">طلب تجنيس</button>
-    <button onclick="showForm('form2')">طلب إصدار بطاقة إثبات</button>
-    <button onclick="showForm('form3')">طلب تفعيل بطاقة إثبات</button>
-    <button onclick="showForm('form4')">عرض بطاقة إثبات</button>
-    <button onclick="showForm('form5')">طلب بيانات التجنيس</button>
-  </div>
+<h1 style="text-align:center; color: gold;">بوابة وزارة الظلال</h1>
 
-  <!-- طلب تجنيس -->
-  <div id="form1" class="form-container">
-    <h2>طلب تجنيس</h2>
-    <input type="text" id="fullName" placeholder="الاسم كامل" required />
-    <input type="date" id="birthDate" placeholder="تاريخ الميلاد" required />
-    <input type="text" id="address" placeholder="العنوان الوطني" required />
-    <select id="gender" required>
-      <option value="">اختر الجنس</option>
-      <option value="ذكر">ذكر</option>
-      <option value="أنثى">أنثى</option>
-    </select>
-    <input type="text" id="birthPlace" placeholder="مكان الميلاد" required />
-    <input type="tel" id="phone" placeholder="رقم الجوال" required />
-    <input type="email" id="email" placeholder="البريد الإلكتروني" required />
-    <input type="text" id="bloodType" placeholder="فصيلة الدم" required />
-    <input type="text" id="maritalStatus" placeholder="الحالة الاجتماعية" required />
-    <button onclick="submitNationality()">طلب تجنيس</button>
-  </div>
+<div style="text-align:center;">
+  <p>اختر النموذج:</p>
+  <button onclick="selectForm('form1')">طلب تجنيس</button>
+  <button onclick="selectForm('form2')">طلب إصدار بطاقة إثبات</button>
+  <button onclick="selectForm('form3')">طلب تفعيل بطاقة إثبات</button>
+  <button onclick="selectForm('form4')">عرض بطاقة إثبات</button>
+  <button onclick="selectForm('form5')">طلب بيانات التجنيس</button>
+</div>
 
-  <!-- طلب إصدار بطاقة إثبات -->
-  <div id="form2" class="form-container">
-    <h2>طلب إصدار بطاقة إثبات</h2>
-    <input type="text" id="issueID" placeholder="رقم الهوية" required />
-    <input type="text" id="issueFileNumber" placeholder="رقم الملف" required />
-    <input type="text" id="issueFingerprint" placeholder="البصمة الإلكترونية" required />
-    <input type="date" id="issueBirthDate" placeholder="تاريخ الميلاد" required />
-    <button onclick="submitIssueCard()">طلب إصدار البطاقة</button>
-  </div>
+<div style="text-align:center; margin-top: 20px;">
+  <button id="showBtn" onclick="showSelectedForm()" disabled>عرض النموذج</button>
+</div>
 
-  <!-- طلب تفعيل بطاقة إثبات -->
-  <div id="form3" class="form-container">
-    <h2>طلب تفعيل بطاقة إثبات</h2>
-    <input type="text" id="activateID" placeholder="رقم الهوية" required />
-    <input type="text" id="activateFileNumber" placeholder="رقم الملف" required />
-    <input type="file" id="activatePhoto" accept="image/*" />
-    <button onclick="submitActivateCard()">طلب تفعيل البطاقة</button>
-  </div>
+<!-- النماذج -->
 
-  <!-- طلب عرض بطاقة إثبات -->
-  <div id="form4" class="form-container">
-    <h2>عرض بطاقة إثبات</h2>
-    <input type="text" id="viewID" placeholder="رقم الهوية" required />
-    <input type="text" id="viewFileNumber" placeholder="رقم الملف" required />
-    <input type="text" id="viewFingerprint" placeholder="البصمة الإلكترونية" required />
-    <input type="date" id="viewBirthDate" placeholder="تاريخ الميلاد" required />
-    <button onclick="submitViewCard()">عرض البطاقة</button>
+<div id="form1" class="form-container">
+  <h2>طلب تجنيس</h2>
+  <p>هذا نموذج طلب التجنيس...</p>
+</div>
 
-    <div id="cardDisplay"></div>
-  </div>
+<div id="form2" class="form-container">
+  <h2>طلب إصدار بطاقة إثبات</h2>
+  <p>هذا نموذج طلب إصدار بطاقة إثبات...</p>
+</div>
 
-  <!-- طلب بيانات التجنيس -->
-  <div id="form5" class="form-container">
-    <h2>طلب بيانات التجنيس</h2>
-    <input type="text" id="dataID" placeholder="رقم الهوية" required />
-    <input type="date" id="dataBirthDate" placeholder="تاريخ الميلاد" required />
-    <input type="text" id="dataFingerprint" placeholder="البصمة الإلكترونية" required />
-    <input type="text" id="dataFileNumber" placeholder="رقم الملف" required />
-    <button onclick="submitGetData()">عرض بيانات التجنيس</button>
+<div id="form3" class="form-container">
+  <h2>طلب تفعيل بطاقة إثبات</h2>
+  <p>هذا نموذج طلب تفعيل بطاقة إثبات...</p>
+</div>
 
-    <pre id="dataDisplay"></pre>
-  </div>
+<div id="form4" class="form-container">
+  <h2>عرض بطاقة إثبات</h2>
+  <p>هذا نموذج عرض بطاقة إثبات...</p>
+</div>
 
-<script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
-  import { getDatabase, ref, set, get, child } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-database.js";
+<div id="form5" class="form-container">
+  <h2>طلب بيانات التجنيس</h2>
+  <p>هذا نموذج طلب بيانات التجنيس...</p>
+</div>
 
-  const firebaseConfig = {
-    apiKey: "AIzaSyDUrt0-kNxgSVlBF4VgyBW84E0g4SNTmiI",
-    authDomain: "portal-shadow.firebaseapp.com",
-    projectId: "portal-shadow",
-    storageBucket: "portal-shadow.firebasestorage.app",
-    messagingSenderId: "800415093843",
-    appId: "1:800415093843:web:b9249f69242f929312a2a6",
-    measurementId: "G-KPW8FHT7KT"
-  };
+<script>
+  let selectedFormId = null;
 
-  const app = initializeApp(firebaseConfig);
-  const database = getDatabase(app);
+  function selectForm(formId) {
+    selectedFormId = formId;
+    document.getElementById('showBtn').disabled = false;
+    // لما تختار نموذج ما نفتح شيء بعد، بس نفعل زر العرض
+  }
 
-  function showForm(formId) {
+  function showSelectedForm() {
+    if (!selectedFormId) return;
+
+    // نخفي كل النماذج
     const forms = document.querySelectorAll('.form-container');
     forms.forEach(f => f.style.display = 'none');
-    document.getElementById(formId).style.display = 'block';
+
+    // نعرض النموذج المحدد
+    document.getElementById(selectedFormId).style.display = 'block';
+
+    // تعطيل زر العرض بعد العرض لمنع التكرار إذا تبي
+    // document.getElementById('showBtn').disabled = true;
   }
-
-  function generateRandomString(length) {
-    const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-    let result = "";
-    for(let i=0; i<length; i++) {
-      result += chars.charAt(Math.floor(Math.random() * chars.length));
-    }
-    return result;
-  }
-
-  // --- 1. طلب تجنيس ---
-  async function submitNationality() {
-    const fullName = document.getElementById('fullName').value.trim();
-    const birthDate = document.getElementById('birthDate').value;
-    const address = document.getElementById('address').value.trim();
-    const gender = document.getElementById('gender').value;
-    const birthPlace = document.getElementById('birthPlace').value.trim();
-    const phone = document.getElementById('phone').value.trim();
-    const email = document.getElementById('email').value.trim();
-    const bloodType = document.getElementById('bloodType').value.trim();
-    const maritalStatus = document.getElementById('maritalStatus').value.trim();
-
-    if (!fullName || !birthDate || !address || !gender || !birthPlace || !phone || !email || !bloodType || !maritalStatus) {
-      alert("يرجى تعبئة جميع الحقول.");
-      return;
-    }
-
-    // توليد رقم ملف 7 أرقام
-    const fileNumber = Math.floor(1000000 + Math.random() * 9000000).toString();
-
-    // توليد رقم هوية 10 أرقام يبدأ بـ 10
-    let nationalID = "10" + Math.floor(100000000 + Math.random() * 900000000).toString();
-
-    // تحقق الرقم ما مكرر
-    const dbRef = ref(database);
-    const snapshot = await get(child(dbRef, `citizens/${nationalID}`));
-    if (snapshot.exists()) {
-      nationalID = "10" + Math.floor(100000000 + Math.random() * 900000000).toString();
-    }
-
-    // توليد بصمة إلكترونية 12 حرف ورقم
-    const fingerprint = generateRandomString(12);
-
-    const data = {
-      fullName,
-      birthDate,
-      address,
-      gender,
-      birthPlace,
-      phone,
-      email,
-      bloodType,
-      maritalStatus,
-      fileNumber,
-      nationalID,
-      fingerprint
-    };
-
-    try {
-      await set(ref(database, 'citizens/' + nationalID), data);
-      alert(`تم إرسال طلب التجنيس بنجاح!
-رقم الملف: ${fileNumber}
-رقم الهوية: ${nationalID}
-البصمة الإلكترونية: ${fingerprint}`);
-    } catch (error) {
-      console.error(error);
-      alert("حدث خطأ أثناء الإرسال، حاول مرة أخرى.");
-    }
-  }
-
-  // --- 2. طلب إصدار بطاقة إثبات ---
-  async function submitIssueCard() {
-    const id = document.getElementById('issueID').value.trim();
-    const fileNum = document.getElementById('issueFileNumber').value.trim();
-    const fingerprint = document.getElementById('issueFingerprint').value.trim();
-    const birthDate = document.getElementById('issueBirthDate').value;
-
-    if (!id || !fileNum || !fingerprint || !birthDate) {
-      alert("يرجى تعبئة جميع الحقول.");
-      return;
-    }
-
-    // تحقق هل يوجد طلب تجنيس مسبقاً
-    const dbRef = ref(database);
-    const citizenSnap = await get(child(dbRef, `citizens/${id}`));
-    if (!citizenSnap.exists()) {
-      alert("لا يمكن إصدار البطاقة لأن طلب التجنيس غير موجود.");
-      return;
-    }
-
-    alert("تمت عملية إصدار البطاقة بنجاح!");
-  }
-
-  // --- 3. طلب تفعيل بطاقة إثبات ---
-  async function submitActivateCard() {
-    const id = document.getElementById('activateID').value.trim();
-    const fileNum = document.getElementById('activateFileNumber').value.trim();
-    const photoInput = document.getElementById('activatePhoto');
-
-    if (!id || !fileNum) {
-      alert("يرجى تعبئة رقم الهوية ورقم الملف.");
-      return;
-    }
-    if (photoInput.files.length === 0) {
-      alert("يرجى رفع صورة شخصية.");
-      return;
-    }
-
-    alert("تمت عملية تفعيل البطاقة بنجاح!");
-  }
-
-  // --- 4. طلب عرض بطاقة إثبات ---
-  async function submitViewCard() {
-    const id = document.getElementById('viewID').value.trim();
-    const fileNum = document.getElementById('viewFileNumber').value.trim();
-    const fingerprint = document.getElementById('viewFingerprint').value.trim();
-    const birthDate = document.getElementById('viewBirthDate').value;
-
-    if (!id || !fileNum || !fingerprint || !birthDate) {
-      alert("يرجى تعبئة جميع الحقول.");
-      return;
-    }
-
-    const dbRef = ref(database);
-    const citizenSnap = await get(child(dbRef, `citizens/${id}`));
-
-    if (!citizenSnap.exists()) {
-      alert("لم يتم العثور على البطاقة.");
-      return;
-    }
-
-    const data = citizenSnap.val();
-
-    if (
-      data.fileNumber !== fileNum ||
-      data.fingerprint !== fingerprint ||
-      data.birthDate !== birthDate
-    ) {
-      alert("بيانات التحقق غير صحيحة.");
-      return;
-    }
-
-    const cardDiv = document.getElementById('cardDisplay');
-    cardDiv.style.display = 'block';
-    cardDiv.innerHTML = `
-      <h3>بطاقة إثبات شخصية</h3>
-      <p><strong>الاسم:</strong> ${data.fullName}</p>
-      <p><strong>تاريخ الميلاد:</strong> ${data.birthDate}</p>
-      <p><strong>رقم الهوية:</strong> ${id}</p>
-      <p><strong>رقم الملف:</strong> ${data.fileNumber}</p>
-      <p><strong>البصمة الإلكترونية:</strong> ${data.fingerprint}</p>
-      <p><strong>الجنس:</strong> ${data.gender}</p>
-      <p><strong>مكان الميلاد:</strong> ${data.birthPlace}</p>
-      <p><strong>البريد الإلكتروني:</strong> ${data.email}</p>
-      <p><strong>رقم الجوال:</strong> ${data.phone}</p>
-    `;
-  }
-
-  // --- 5. طلب بيانات التجنيس ---
-  async function submitGetData() {
-    const id = document.getElementById('dataID').value.trim();
-    const birthDate = document.getElementById('dataBirthDate').value;
-    const fingerprint = document.getElementById('dataFingerprint').value.trim();
-    const fileNum = document.getElementById('dataFileNumber').value.trim();
-
-    if (!id || !birthDate || !fingerprint || !fileNum) {
-      alert("يرجى تعبئة جميع الحقول.");
-      return;
-    }
-
-    const dbRef = ref(database);
-    const citizenSnap = await get(child(dbRef, `citizens/${id}`));
-
-    if (!citizenSnap.exists()) {
-      alert("لم يتم العثور على البيانات.");
-      return;
-    }
-
-    const data = citizenSnap.val();
-
-    if (
-      data.birthDate !== birthDate ||
-      data.fingerprint !== fingerprint ||
-      data.fileNumber !== fileNum
-    ) {
-      alert("بيانات التحقق غير صحيحة.");
-      return;
-    }
-
-    const display = document.getElementById('dataDisplay');
-    display.style.display = 'block';
-    display.textContent = JSON.stringify(data, null, 2);
-  }
-
-  // لا تعرض أي نموذج تلقائياً — لازم المستخدم يضغط زر
-  // showForm('form1');
-
 </script>
 
 </body>
