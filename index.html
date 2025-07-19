@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>وزارة الظلال</title>
+  <style>
+    /* ألوان رسمية */
+    body {
+      margin: 0;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #0a0a0a; /* أسود مطفي */
+      color: #d4af37; /* ذهبي */
+      direction: rtl;
+    }
+    header {
+      text-align: center;
+      padding: 40px 20px;
+    }
+    /* مكان الشعار */
+    .logo {
+      max-width: 180px;
+      margin: 0 auto 20px;
+      display: block;
+    }
+    h1 {
+      margin: 0;
+      font-size: 2.5rem;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-shadow: 0 0 5px #d4af37;
+    }
+    .welcome {
+      font-size: 1.3rem;
+      margin-top: 10px;
+      font-weight: 500;
+      letter-spacing: 1.2px;
+      text-shadow: 0 0 4px #b28c00;
+    }
+    /* قسم الأخبار */
+    .news-section {
+      background-color: #1a1a1a;
+      margin: 40px auto;
+      max-width: 900px;
+      border-radius: 12px;
+      padding: 20px 30px;
+      box-shadow: 0 0 10px #555;
+    }
+    .news-section h2 {
+      margin-top: 0;
+      border-bottom: 2px solid #d4af37;
+      padding-bottom: 8px;
+      font-weight: 600;
+    }
+    .news-list {
+      list-style: none;
+      padding: 0;
+      margin: 15px 0 0 0;
+    }
+    .news-list li {
+      padding: 10px 0;
+      border-bottom: 1px solid #444;
+      cursor: default;
+      transition: color 0.3s;
+    }
+    .news-list li:hover {
+      color: #ffd54f;
+    }
+    /* معرض الصور */
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 15px;
+      max-width: 900px;
+      margin: 40px auto 60px;
+    }
+    .gallery img {
+      width: 100%;
+      border-radius: 10px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
+      box-shadow: 0 0 8px #333;
+    }
+    .gallery img:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 15px #d4af37;
+    }
+    /* زر الصفحة القادمة */
+    .btn-services {
+      display: block;
+      max-width: 300px;
+      margin: 0 auto 60px;
+      padding: 15px 30px;
+      font-size: 1.3rem;
+      font-weight: 700;
+      background-color: transparent;
+      border: 2px solid #d4af37;
+      border-radius: 35px;
+      color: #d4af37;
+      text-align: center;
+      text-decoration: none;
+      transition: background-color 0.3s, color 0.3s;
+    }
+    .btn-services:hover {
+      background-color: #d4af37;
+      color: #0a0a0a;
+      cursor: pointer;
+    }
+    /* صفحة تحت التطوير */
+    .under-construction {
+      text-align: center;
+      margin-top: 150px;
+      color: #d4af37;
+      font-size: 1.8rem;
+      font-weight: 600;
+      text-shadow: 0 0 8px #b28c00;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <!-- مكان الشعار، عوّض src بالرابط أو مسار الشعار عندك -->
+    <img src="logo.png" alt="شعار وزارة الظلال" class="logo" />
+    <h1>وزارة الظلال</h1>
+    <p class="welcome">مرحباً بكم في وزارة الظلال – حيث نصنع المستقبل بصمت الظل.</p>
+  </header>
+
+  <section class="news-section" aria-label="الأخبار">
+    <h2>آخر الأخبار</h2>
+    <ul class="news-list">
+      <li>إطلاق مشروع الظلال الجديدة في 1 أغسطس 2025</li>
+      <li>تحديث نظام العمل الداخلي في الوزارة</li>
+      <li>فعالية الظلال الرقمية القادمة في سبتمبر</li>
+    </ul>
+  </section>
+
+  <section class="gallery" aria-label="معرض الصور">
+    <!-- صور تمثيلية، عوّض الروابط حسب الصور عندك -->
+    <img src="shadow1.jpg" alt="صورة تعبر عن الظلال 1" />
+    <img src="shadow2.jpg" alt="صورة تعبر عن الظلال 2" />
+    <img src="shadow3.jpg" alt="صورة تعبر عن الظلال 3" />
+    <img src="shadow4.jpg" alt="صورة تعبر عن الظلال 4" />
+  </section>
+
+  <a href="gate.html" class="btn-services">الذهاب إلى صفحة الخدمات</a>
+
+</body>
+</html>
